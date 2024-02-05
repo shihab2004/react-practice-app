@@ -1,19 +1,18 @@
-import StudentCreateUpdate from "./StudentCreateUpdate";
-import Table from "./Table";
-import useUserData from "./hooks/useUserData";
-import useStudents from "./hooks/useStudents"
-import { useEffect } from "react";
+import StudentForm from "./StudentForm";
+import StudentsTable from "./StudentsTable";
+import useBaseForm from "../../hooks/useBaseForm";
 
 export default function Home() {
 
 
-    const useStudentDataObj = useStudents();
-    
-    const useUserDataObj = useUserData()
-
-    useEffect(()=>{
-
-    },)
+    const useStudentsHook = useBaseForm(
+        [
+            {id:1,name:"Shihab",roll:12233},
+            {id:2,name:"Siam",roll:12433},
+            {id:3,name:"Rafik",roll:12253},
+            {id:4,name:"Rana",roll:12843},
+        ]
+    )
 
 
     return (
@@ -24,11 +23,11 @@ export default function Home() {
                     <h1 className="display-3 py-5">Welcome Home!</h1>
             </div>
             <div className="container">
-                <Table {...{useUserDataObj,useStudentDataObj}} />
+                <StudentsTable {...useStudentsHook} />
             </div>
 
             <div className="container text-center">
-                <StudentCreateUpdate {...{useUserDataObj,useStudentDataObj}} />
+                <StudentForm {...useStudentsHook} />
             </div>
          </div>
         </>
